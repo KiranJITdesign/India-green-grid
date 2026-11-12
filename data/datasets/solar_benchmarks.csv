@@ -1,0 +1,20 @@
+parameter,value,note
+cost_per_kw_inr,60000.0,"Typical residential range 50,000-75,000"
+annual_yield_kwh_per_kw,1450.0,"Ranges ~1,300-1,600 by location"
+avg_tariff_inr_per_kwh,7.0,Varies by state/slab; replace with your own
+subsidy_first_2kw_inr_per_kw,30000.0,PM Surya Ghar
+subsidy_3rd_kw_inr,18000.0,PM Surya Ghar
+subsidy_cap_inr,78000.0,PM Surya Ghar
+panel_degradation_percent_per_year,0.5,Typical
+system_life_years,25.0,Typical
+system_kw,est_gross_cost_inr,pm_surya_ghar_subsidy_inr,net_cost_inr,annual_generation_kwh,annual_savings_inr,payback_years,assumptions
+1,60000,30000,30000,1450,10150,3.0,"Rs 60,000/kW; 1,450 kWh/kW/yr; Rs 7/kWh tariff; subsidy Rs 30k/kW to 2kW + Rs 18k for 3rd kW, cap Rs 78k"
+2,120000,60000,60000,2900,20300,3.0,"Rs 60,000/kW; 1,450 kWh/kW/yr; Rs 7/kWh tariff; subsidy Rs 30k/kW to 2kW + Rs 18k for 3rd kW, cap Rs 78k"
+3,180000,78000,102000,4350,30450,3.3,"Rs 60,000/kW; 1,450 kWh/kW/yr; Rs 7/kWh tariff; subsidy Rs 30k/kW to 2kW + Rs 18k for 3rd kW, cap Rs 78k"
+4,240000,78000,162000,5800,40600,4.0,"Rs 60,000/kW; 1,450 kWh/kW/yr; Rs 7/kWh tariff; subsidy Rs 30k/kW to 2kW + Rs 18k for 3rd kW, cap Rs 78k"
+5,300000,78000,222000,7250,50750,4.4,"Rs 60,000/kW; 1,450 kWh/kW/yr; Rs 7/kWh tariff; subsidy Rs 30k/kW to 2kW + Rs 18k for 3rd kW, cap Rs 78k"
+6,360000,78000,282000,8700,60900,4.6,"Rs 60,000/kW; 1,450 kWh/kW/yr; Rs 7/kWh tariff; subsidy Rs 30k/kW to 2kW + Rs 18k for 3rd kW, cap Rs 78k"
+7,420000,78000,342000,10150,71050,4.8,"Rs 60,000/kW; 1,450 kWh/kW/yr; Rs 7/kWh tariff; subsidy Rs 30k/kW to 2kW + Rs 18k for 3rd kW, cap Rs 78k"
+8,480000,78000,402000,11600,81200,5.0,"Rs 60,000/kW; 1,450 kWh/kW/yr; Rs 7/kWh tariff; subsidy Rs 30k/kW to 2kW + Rs 18k for 3rd kW, cap Rs 78k"
+9,540000,78000,462000,13050,91350,5.1,"Rs 60,000/kW; 1,450 kWh/kW/yr; Rs 7/kWh tariff; subsidy Rs 30k/kW to 2kW + Rs 18k for 3rd kW, cap Rs 78k"
+10,600000,78000,522000,14500,101500,5.1,"Rs 60,000/kW; 1,450 kWh/kW/yr; Rs 7/kWh tariff; subsidy Rs 30k/kW to 2kW + Rs 18k for 3rd kW, cap Rs 78k"

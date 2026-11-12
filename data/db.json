@@ -222,6 +222,21 @@
       "jobId": "GJ-001",
       "jobTitle": "Rooftop Solar Installation Engineer",
       "company": "Tata Power Solar Systems",
+      "candidateName": "Soudri Kiran",
+      "email": "soudrikiran@gmail.com",
+      "phone": "5457735434",
+      "experienceLevel": "Entry Level (0-2 yrs)",
+      "qualification": "B.Tech / B.E. Electrical",
+      "scgjCertification": true,
+      "id": "APP-004",
+      "applicationNumber": "SCGJ-2026-75741",
+      "status": "Received",
+      "createdAt": "2026-11-12T07:30:49.907Z"
+    },
+    {
+      "jobId": "GJ-001",
+      "jobTitle": "Rooftop Solar Installation Engineer",
+      "company": "Tata Power Solar Systems",
       "candidateName": "Meera Nambiar",
       "email": "meera@example.com",
       "phone": "+91 94470 54321",
@@ -820,5 +835,5 @@
       "applyUrlLabel": "Apply via SIDBI Mitra"
     }
   ],
-  "lastUpdated": "2026-11-12T06:52:37.623Z"
+  "lastUpdated": "2026-11-12T07:30:49.907Z"
 }

@@ -3,6 +3,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import { SEEDED_GREEN_JOBS, GreenJob } from "@/data/energyData";
+import { ORIGINAL_JOBS } from "@/data/originalDatasets";
 import {
   Briefcase,
   Search,
@@ -21,7 +22,23 @@ import {
 } from "lucide-react";
 
 export default function GreenJobsPage() {
-  const [jobs, setJobs] = useState<GreenJob[]>(SEEDED_GREEN_JOBS);
+  const initialDatasetJobs: GreenJob[] = ORIGINAL_JOBS.map((oj) => ({
+    id: oj.id,
+    title: oj.job_title,
+    company: oj.employer_type,
+    sector: oj.domain,
+    location: oj.typical_locations,
+    state: oj.typical_locations.includes(",") ? oj.typical_locations.split(",")[0].trim() : oj.typical_locations,
+    type: "Full-Time" as const,
+    experienceLevel: oj.level === "Entry" ? "Entry Level (0-2 yrs)" : oj.level === "Mid" ? "Mid Level (3-5 yrs)" : "Senior Level (6+ yrs)",
+    salaryRangeINR: `₹${oj.salary_min_lpa} - ${oj.salary_max_lpa} LPA`,
+    requiredSkills: oj.key_skills,
+    description: `${oj.job_title} role in the ${oj.domain} sector. Typical qualification: ${oj.typical_qualification}. ${oj.note}`,
+    postedDate: "2026-02-10",
+    certificationPartner: "Skill Council for Green Jobs (SCGJ)",
+  }));
+
+  const [jobs, setJobs] = useState<GreenJob[]>(initialDatasetJobs);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedSector, setSelectedSector] = useState<string>("All");
   const [selectedExperience, setSelectedExperience] = useState<string>("All");
@@ -39,7 +56,10 @@ export default function GreenJobsPage() {
   const [confirmedAppNumber, setConfirmedAppNumber] = useState<string | null>(null);
   const [appliedJobIds, setAppliedJobIds] = useState<Record<string, string>>({});
 
-  const sectors = ["All", "Solar PV", "Wind Energy", "Battery & BESS", "ESG & Policy", "Green Hydrogen", "Smart Grid"];
+  const sectors = useMemo(() => {
+    const s = Array.from(new Set(jobs.map((j) => j.sector))).sort();
+    return ["All", ...s];
+  }, [jobs]);
   const experienceLevels = ["All", "Entry Level (0-2 yrs)", "Mid Level (3-5 yrs)", "Senior Level (6+ yrs)"];
 
   // Fetch from backend

@@ -1,0 +1,8 @@
+fiscal_year,source,generation_billion_units_approx,share_percent_approx,data_quality
+FY2023-24,Coal & lignite,1300,74.0,approximate; verify at cea.nic.in
+FY2023-24,Large hydro,160,9.0,approximate; verify at cea.nic.in
+FY2023-24,Solar,130,7.4,approximate; verify at cea.nic.in
+FY2023-24,Wind,80,4.5,approximate; verify at cea.nic.in
+FY2023-24,Nuclear,48,2.7,approximate; verify at cea.nic.in
+FY2023-24,Gas,40,2.2,approximate; verify at cea.nic.in
+FY2023-24,Biomass/small hydro/other RE,20,1.1,approximate; verify at cea.nic.in

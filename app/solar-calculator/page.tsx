@@ -10,6 +10,7 @@ import {
   POPULAR_LOCATIONS,
   SOLAR_CONSTANTS,
 } from "@/data/energyData";
+import { ORIGINAL_SOLAR_BENCHMARKS } from "@/data/originalDatasets";
 import { SolarCashflowChart } from "@/components/charts/SolarCashflowChart";
 import { SourceTooltip } from "@/components/SourceTooltip";
 import {
@@ -424,6 +425,77 @@ export default function SolarCalculatorPage() {
             25-Year Net Cashflow Projection
           </h4>
           <SolarCashflowChart result={result} />
+        </div>
+
+        {/* Official PM Surya Ghar 1-10 kW Benchmark Sizing Matrix from Dataset */}
+        <div className="pt-4 border-t border-slate-100 space-y-3">
+          <div className="flex items-center justify-between">
+            <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
+              <span>🇮🇳</span>
+              <span>Official PM Surya Ghar 1–10 kW Benchmark Sizing Matrix</span>
+            </h4>
+            <span className="text-[10px] text-slate-400 font-mono">
+              ₹60k/kW • 1,450 kWh/kW/yr • ₹7/kWh tariff
+            </span>
+          </div>
+
+          <div className="overflow-x-auto rounded-xl border border-slate-200">
+            <table className="w-full text-left text-xs text-slate-700">
+              <thead className="bg-slate-50 text-[10px] font-bold text-slate-600 uppercase border-b border-slate-200">
+                <tr>
+                  <th className="py-2.5 px-3">Capacity</th>
+                  <th className="py-2.5 px-3">Gross Cost</th>
+                  <th className="py-2.5 px-3 text-emerald-700">Subsidy</th>
+                  <th className="py-2.5 px-3">Net Cost</th>
+                  <th className="py-2.5 px-3">Annual Gen</th>
+                  <th className="py-2.5 px-3 text-emerald-800">Annual Savings</th>
+                  <th className="py-2.5 px-3">Payback</th>
+                  <th className="py-2.5 px-3 text-right">Action</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100">
+                {ORIGINAL_SOLAR_BENCHMARKS.map((row) => {
+                  const isCurrent = Math.abs(row.system_kw - result.recommendedKw) < 0.25;
+                  return (
+                    <tr
+                      key={row.system_kw}
+                      className={`hover:bg-slate-50/80 transition-colors ${
+                        isCurrent ? "bg-emerald-50/70 font-semibold" : ""
+                      }`}
+                    >
+                      <td className="py-2.5 px-3 font-bold text-slate-900">
+                        {row.system_kw} kW {isCurrent && "★"}
+                      </td>
+                      <td className="py-2.5 px-3">₹{row.est_gross_cost_inr.toLocaleString()}</td>
+                      <td className="py-2.5 px-3 font-bold text-emerald-700">
+                        ₹{row.pm_surya_ghar_subsidy_inr.toLocaleString()}
+                      </td>
+                      <td className="py-2.5 px-3 font-bold text-slate-900">
+                        ₹{row.net_cost_inr.toLocaleString()}
+                      </td>
+                      <td className="py-2.5 px-3">{row.annual_generation_kwh.toLocaleString()} kWh</td>
+                      <td className="py-2.5 px-3 font-semibold text-emerald-800">
+                        ₹{row.annual_savings_inr.toLocaleString()}
+                      </td>
+                      <td className="py-2.5 px-3">{row.payback_years} Yrs</td>
+                      <td className="py-2.5 px-3 text-right">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setDesiredCapacityKw(row.system_kw);
+                            setMonthlyBill(Math.round((row.annual_savings_inr / 12)));
+                          }}
+                          className="px-2 py-1 rounded text-[10px] font-bold bg-white border border-emerald-600 text-emerald-700 hover:bg-emerald-50 transition-colors"
+                        >
+                          Select
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 

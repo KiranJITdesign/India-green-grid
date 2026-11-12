@@ -20,6 +20,7 @@ import { ReferenceDonutChart } from "@/components/charts/ReferenceDonutChart";
 import { ReferenceRpoBarChart } from "@/components/charts/ReferenceRpoBarChart";
 import { DashboardIllustration } from "@/components/DashboardIllustration";
 import { SourceTooltip } from "@/components/SourceTooltip";
+import { ORIGINAL_CAPACITY_GROWTH } from "@/data/originalDatasets";
 
 export default function DashboardPage() {
   const [showMixInfo, setShowMixInfo] = useState(false);
@@ -313,6 +314,66 @@ export default function DashboardPage() {
               <ArrowRight className="w-4 h-4 text-emerald-700 group-hover:translate-x-1 transition-transform" />
             </div>
           </Link>
+        </div>
+      </section>
+
+      {/* 10-Year Clean Energy Installed Capacity Trajectory (FY2015 - FY2025 Dataset) */}
+      <section className="bg-white border border-slate-200/90 rounded-2xl p-5 sm:p-6 shadow-sm space-y-3">
+        <div className="flex items-center justify-between flex-wrap gap-2 border-b border-slate-100 pb-3">
+          <div>
+            <h3 className="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+              <Zap className="w-4 h-4 text-emerald-700" />
+              <span>Decadal Installed Capacity Growth Trajectory (FY2015 – FY2025)</span>
+            </h3>
+            <p className="text-xs text-slate-500 mt-0.5">
+              Official CEA/MNRE historical capacity timeline: Solar expanded ~28x from 3,744 MW to 105,646 MW.
+            </p>
+          </div>
+          <a
+            href="https://npp.gov.in/landing-home"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-emerald-800 hover:text-emerald-900 font-semibold flex items-center gap-1"
+          >
+            <span>National Power Portal (npp.gov.in)</span>
+            <ExternalLink className="w-3.5 h-3.5" />
+          </a>
+        </div>
+
+        <div className="overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full text-left text-xs text-slate-700">
+            <thead className="bg-slate-50 text-slate-600 text-[10px] font-bold uppercase tracking-wider border-b border-slate-200">
+              <tr>
+                <th className="py-2.5 px-3">Fiscal Year</th>
+                <th className="py-2.5 px-3">Coal & Lignite (MW)</th>
+                <th className="py-2.5 px-3 text-amber-700">Solar PV (MW)</th>
+                <th className="py-2.5 px-3 text-sky-700">Wind Energy (MW)</th>
+                <th className="py-2.5 px-3 text-emerald-800 font-bold">Total RE (Solar + Wind MW)</th>
+                <th className="py-2.5 px-3">Data Quality</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100">
+              {ORIGINAL_CAPACITY_GROWTH.map((row) => {
+                const totalRe = row.solar_mw + row.wind_mw;
+                return (
+                  <tr key={row.fiscal_year} className="hover:bg-slate-50 transition-colors">
+                    <td className="py-2.5 px-3 font-bold text-slate-900">{row.fiscal_year}</td>
+                    <td className="py-2.5 px-3 font-mono">{row.coal_lignite_mw.toLocaleString()}</td>
+                    <td className="py-2.5 px-3 font-mono font-semibold text-amber-700">
+                      {row.solar_mw.toLocaleString()}
+                    </td>
+                    <td className="py-2.5 px-3 font-mono text-sky-700">
+                      {row.wind_mw.toLocaleString()}
+                    </td>
+                    <td className="py-2.5 px-3 font-mono font-bold text-emerald-800">
+                      {totalRe.toLocaleString()} MW
+                    </td>
+                    <td className="py-2.5 px-3 text-slate-400 text-[10px]">{row.data_quality}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
       </section>
 

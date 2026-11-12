@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { GREEN_FINANCE_SCHEMES } from "@/data/energyData";
+import { ORIGINAL_SCHEMES } from "@/data/originalDatasets";
 import { SourceTooltip } from "@/components/SourceTooltip";
 import {
   Coins,
@@ -224,6 +225,68 @@ export default function GreenFinancePage() {
                       className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 hover:text-emerald-900 underline"
                     >
                       <span>Portal</span>
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {/* Comprehensive 11 National Clean Energy Schemes from Official Dataset */}
+      <section className="bg-white border border-slate-200/90 rounded-2xl p-6 shadow-sm space-y-4">
+        <div className="flex items-center justify-between border-b border-slate-100 pb-3 flex-wrap gap-2">
+          <div>
+            <h2 className="font-bold text-slate-900 text-base flex items-center gap-2">
+              <span>🇮🇳</span>
+              <span>National Clean Energy Programs & Schemes (Official Dataset)</span>
+            </h2>
+            <p className="text-xs text-slate-500 mt-0.5">
+              Comprehensive taxonomy of 11 Central Government subsidies, concessional loans, PLI manufacturing incentives, and sovereign green bonds.
+            </p>
+          </div>
+          <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
+            11 Central Schemes
+          </span>
+        </div>
+
+        <div className="overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full text-left text-xs text-slate-700">
+            <thead className="bg-slate-50 text-slate-600 text-[10px] font-bold uppercase tracking-wider border-b border-slate-200">
+              <tr>
+                <th className="py-2.5 px-3">Scheme</th>
+                <th className="py-2.5 px-3">Type</th>
+                <th className="py-2.5 px-3">Nodal Provider</th>
+                <th className="py-2.5 px-3">Focus Area</th>
+                <th className="py-2.5 px-3">Benefit Summary</th>
+                <th className="py-2.5 px-3">Beneficiary</th>
+                <th className="py-2.5 px-3 text-right">Official Source</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100">
+              {ORIGINAL_SCHEMES.map((row, idx) => (
+                <tr key={idx} className="hover:bg-slate-50 transition-colors">
+                  <td className="py-3 px-3 font-bold text-slate-900">{row.scheme}</td>
+                  <td className="py-3 px-3">
+                    <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-700">
+                      {row.type}
+                    </span>
+                  </td>
+                  <td className="py-3 px-3 text-slate-600 font-medium">{row.provider}</td>
+                  <td className="py-3 px-3 text-slate-800">{row.focus_area}</td>
+                  <td className="py-3 px-3 text-emerald-800 font-medium max-w-xs">{row.benefit_summary}</td>
+                  <td className="py-3 px-3 text-slate-500 text-[11px]">{row.eligible_beneficiary}</td>
+                  <td className="py-3 px-3 text-right">
+                    <a
+                      href={row.redirectUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 hover:text-emerald-900 underline"
+                      title={row.official_source}
+                    >
+                      <span>{row.official_source}</span>
                       <ExternalLink className="w-3 h-3" />
                     </a>
                   </td>

@@ -1,0 +1,3 @@
+entity,entity_type,fiscal_year,total_consumption_mu,re_consumption_mu,re_share_percent_FORMULA,meets_target_Y_N,note
+EXAMPLE Steel Co (sample),Industry (designated consumer),FY2024-25,5000,1400,28.0,N,Illustrative rows only; target 33.01% for FY2024-25
+EXAMPLE DISCOM (sample),Distribution utility,FY2024-25,12000,3500,29.17,N,Illustrative rows only; target 33.01% for FY2024-25

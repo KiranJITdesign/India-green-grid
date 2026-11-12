@@ -11,6 +11,10 @@ import {
   DiscomPreset,
   RPO_CONSTANTS,
 } from "@/data/energyData";
+import {
+  ORIGINAL_RPO_ENTITIES,
+  ORIGINAL_RPO_TRAJECTORY,
+} from "@/data/originalDatasets";
 import { RpoGauge } from "@/components/charts/RpoGauge";
 import { SourceTooltip } from "@/components/SourceTooltip";
 import { StoredRpoAudit } from "@/lib/db";
@@ -112,6 +116,18 @@ export default function RpoTrackerPage() {
   const displayTotal = unitMode === "MU" ? totalProcured / 1000 : totalProcured;
   const displayRenewable = unitMode === "MU" ? renewableProcured / 1000 : renewableProcured;
 
+  const allPresets: DiscomPreset[] = [
+    ...ORIGINAL_RPO_ENTITIES.map((ent, idx) => ({
+      name: ent.entity,
+      state: ent.entity_type.includes("Industry") ? "Industrial Consumer" : "DISCOM Utility",
+      code: `ENT-${idx + 1}`,
+      totalProcuredMWh: ent.total_consumption_mu * 1000,
+      renewableProcuredMWh: ent.re_consumption_mu * 1000,
+      reportedPeriod: ent.fiscal_year,
+    })),
+    ...SEEDED_DISCOMS,
+  ];
+
   return (
     <div className="space-y-6 animate-in fade-in duration-300">
       {/* Page Header */}
@@ -190,13 +206,25 @@ export default function RpoTrackerPage() {
           </span>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-          {SEEDED_DISCOMS.map((discom) => {
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-3">
+          {allPresets.map((discom) => {
             const isSelected = activeDiscomCode === discom.code;
             const rePercent = ((discom.renewableProcuredMWh / discom.totalProcuredMWh) * 100).toFixed(1);
             const isCompliant2025 = Number(rePercent) >= RPO_CONSTANTS.activeTarget2025;
 
-            return (
+            const allPresets: DiscomPreset[] = [
+    ...ORIGINAL_RPO_ENTITIES.map((ent, idx) => ({
+      name: ent.entity,
+      state: ent.entity_type.includes("Industry") ? "Industrial Consumer" : "DISCOM Utility",
+      code: `ENT-${idx + 1}`,
+      totalProcuredMWh: ent.total_consumption_mu * 1000,
+      renewableProcuredMWh: ent.re_consumption_mu * 1000,
+      reportedPeriod: ent.fiscal_year,
+    })),
+    ...SEEDED_DISCOMS,
+  ];
+
+  return (
               <button
                 key={discom.code}
                 onClick={() => handleSelectPreset(discom)}
@@ -467,6 +495,56 @@ export default function RpoTrackerPage() {
           </div>
         </div>
       </div>
+
+      {/* Statutory Ministry of Power RCO Trajectory Table from Dataset */}
+      <section className="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-sm space-y-3">
+        <div className="flex items-center justify-between flex-wrap gap-2">
+          <div className="flex items-center gap-2">
+            <span className="text-sm">🇮🇳</span>
+            <h2 className="font-bold text-slate-900 text-sm">
+              Ministry of Power (MoP) Statutory RCO Trajectory (FY2023–24 to FY2029–30)
+            </h2>
+          </div>
+          <a
+            href="https://www.powermin.gov.in/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-emerald-800 hover:text-emerald-900 font-semibold flex items-center gap-1"
+          >
+            <span>Official Gazette Notification (powermin.gov.in)</span>
+            <ExternalLink className="w-3.5 h-3.5" />
+          </a>
+        </div>
+
+        <div className="overflow-x-auto rounded-xl border border-slate-200">
+          <table className="w-full text-left text-xs text-slate-700">
+            <thead className="bg-slate-50 text-slate-600 text-[11px] uppercase tracking-wider border-b border-slate-200">
+              <tr>
+                <th className="py-2.5 px-3">Fiscal Year</th>
+                <th className="py-2.5 px-3">Wind RPO %</th>
+                <th className="py-2.5 px-3">Hydro HPO %</th>
+                <th className="py-2.5 px-3">Other RE %</th>
+                <th className="py-2.5 px-3 text-emerald-800 font-bold">Total Statutory Target %</th>
+                <th className="py-2.5 px-3">Regulatory Source</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100">
+              {ORIGINAL_RPO_TRAJECTORY.map((row) => (
+                <tr key={row.fiscal_year} className="hover:bg-slate-50 transition-colors">
+                  <td className="py-2.5 px-3 font-bold text-slate-900">{row.fiscal_year}</td>
+                  <td className="py-2.5 px-3 font-mono">{row.wind_percent}%</td>
+                  <td className="py-2.5 px-3 font-mono">{row.hydro_hpo_percent}%</td>
+                  <td className="py-2.5 px-3 font-mono">{row.other_re_percent}%</td>
+                  <td className="py-2.5 px-3 font-bold font-mono text-emerald-700">
+                    {row.total_re_percent}%
+                  </td>
+                  <td className="py-2.5 px-3 text-slate-500 text-[11px]">{row.note}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
 
       {/* Backend Live Audit Registry Section */}
       <section className="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-sm space-y-3">

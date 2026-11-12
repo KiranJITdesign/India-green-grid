@@ -297,11 +297,11 @@ export interface GreenJob {
   id: string;
   title: string;
   company: string;
-  sector: "Solar PV" | "Wind Energy" | "Battery & BESS" | "ESG & Policy" | "Green Hydrogen" | "Smart Grid";
+  sector: string;
   location: string;
   state: string;
-  type: "Full-Time" | "Contract" | "Apprenticeship";
-  experienceLevel: "Entry Level (0-2 yrs)" | "Mid Level (3-5 yrs)" | "Senior Level (6+ yrs)";
+  type: "Full-Time" | "Contract" | "Apprenticeship" | string;
+  experienceLevel: "Entry Level (0-2 yrs)" | "Mid Level (3-5 yrs)" | "Senior Level (6+ yrs)" | string;
   salaryRangeINR: string;
   requiredSkills: string[];
   description: string;
