@@ -105,6 +105,25 @@
   ],
   "solarLeads": [
     {
+      "consumerName": "Soudri Kiran",
+      "phone": "742698412874",
+      "email": "soudrikiran@gmail.com",
+      "city": "Karnataka",
+      "state": "Karnataka",
+      "monthlyBill": 3100,
+      "roofSqFt": 549,
+      "recommendedKw": 4.5,
+      "estimatedCost": 315000,
+      "subsidy": 78000,
+      "netCost": 237000,
+      "monthlySavings": 3100,
+      "paybackYears": 6.4,
+      "id": "LEAD-005",
+      "applicationNumber": "PM-SG-2026-KA-9367",
+      "status": "Under Review",
+      "createdAt": "2026-11-12T06:15:26.970Z"
+    },
+    {
       "consumerName": "Arjun Dasgupta",
       "phone": "+91 98300 12345",
       "email": "arjun@example.com",
@@ -784,5 +803,5 @@
       "applyUrlLabel": "Apply via SIDBI Mitra"
     }
   ],
-  "lastUpdated": "2026-11-12T05:46:44.420Z"
+  "lastUpdated": "2026-11-12T06:15:26.970Z"
 }

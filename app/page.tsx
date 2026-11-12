@@ -14,6 +14,7 @@ import {
   Sun,
   Briefcase,
   FileText,
+  ExternalLink,
 } from "lucide-react";
 import { ReferenceDonutChart } from "@/components/charts/ReferenceDonutChart";
 import { ReferenceRpoBarChart } from "@/components/charts/ReferenceRpoBarChart";
@@ -45,6 +46,27 @@ export default function DashboardPage() {
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-xl">
               Empowering citizens, DISCOMs and policymakers for a cleaner, renewable and sustainable India.
             </p>
+
+            <div className="pt-2 flex items-center gap-2 flex-wrap">
+              <a
+                href="https://npp.gov.in/landing-home"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 transition-colors shadow-sm"
+              >
+                <span>National Power Portal (npp.gov.in)</span>
+                <ExternalLink className="w-3.5 h-3.5 text-emerald-700" />
+              </a>
+              <a
+                href="https://www.powermin.gov.in/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 transition-colors shadow-sm"
+              >
+                <span>Ministry of Power (powermin.gov.in)</span>
+                <ExternalLink className="w-3.5 h-3.5 text-slate-500" />
+              </a>
+            </div>
           </div>
 
           {/* Right Vector Illustration matching Reference Image 1 */}
@@ -294,11 +316,40 @@ export default function DashboardPage() {
         </div>
       </section>
 
-      {/* Footer matching Reference Image 1 */}
+      {/* Footer matching Reference Image 1 with live redirect citations */}
       <footer className="pt-6 border-t border-slate-200/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
         <div className="flex items-center gap-1.5 flex-wrap">
           <Info className="w-3.5 h-3.5 text-slate-400" />
-          <span>Data as of 2026 | Sources: CEA (Generation Mix), MNRE (PM Surya Ghar), Cabinet Press Release (GEC-III)</span>
+          <span>Data as of 2026 | Official Portals:</span>
+          <a
+            href="https://npp.gov.in/landing-home"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-emerald-700 hover:underline font-medium flex items-center gap-0.5"
+          >
+            <span>CEA / NPP</span>
+            <ExternalLink className="w-3 h-3" />
+          </a>
+          <span>•</span>
+          <a
+            href="https://pmsuryaghar.gov.in/#/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-emerald-700 hover:underline font-medium flex items-center gap-0.5"
+          >
+            <span>PM Surya Ghar</span>
+            <ExternalLink className="w-3 h-3" />
+          </a>
+          <span>•</span>
+          <a
+            href="https://www.powermin.gov.in/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-emerald-700 hover:underline font-medium flex items-center gap-0.5"
+          >
+            <span>Ministry of Power</span>
+            <ExternalLink className="w-3 h-3" />
+          </a>
         </div>
         <div className="flex items-center gap-1 font-medium text-emerald-800">
           <span>India towards a Cleaner, Greener Grid</span>

@@ -136,31 +136,45 @@ export default function RpoTrackerPage() {
           </p>
         </div>
 
-        {/* Target Year Selector Toggle */}
-        <div className="flex items-center gap-2 bg-slate-100 p-1 rounded-xl self-start md:self-auto text-xs">
-          <span className="text-slate-500 px-2 font-medium">Target:</span>
-          <button
-            type="button"
-            onClick={() => setTargetYear("2025")}
-            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
-              targetYear === "2025"
-                ? "bg-[#064e3b] text-white shadow-sm"
-                : "text-slate-600 hover:text-slate-900"
-            }`}
+        {/* Right actions: MoP Portal & Target Year Selector */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2.5 self-start md:self-auto">
+          <a
+            href="https://www.powermin.gov.in/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold shadow-sm transition-colors"
+            title="Redirect to Ministry of Power (powermin.gov.in)"
           >
-            2025 (29.91%)
-          </button>
-          <button
-            type="button"
-            onClick={() => setTargetYear("2030")}
-            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
-              targetYear === "2030"
-                ? "bg-[#064e3b] text-white shadow-sm"
-                : "text-slate-600 hover:text-slate-900"
-            }`}
-          >
-            2030 (43.33%)
-          </button>
+            <span>Ministry of Power (powermin.gov.in)</span>
+            <ExternalLink className="w-3.5 h-3.5 text-emerald-700" />
+          </a>
+
+          {/* Target Year Selector Toggle */}
+          <div className="flex items-center gap-2 bg-slate-100 p-1 rounded-xl text-xs">
+            <span className="text-slate-500 px-2 font-medium">Target:</span>
+            <button
+              type="button"
+              onClick={() => setTargetYear("2025")}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                targetYear === "2025"
+                  ? "bg-[#064e3b] text-white shadow-sm"
+                  : "text-slate-600 hover:text-slate-900"
+              }`}
+            >
+              2025 (29.91%)
+            </button>
+            <button
+              type="button"
+              onClick={() => setTargetYear("2030")}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                targetYear === "2030"
+                  ? "bg-[#064e3b] text-white shadow-sm"
+                  : "text-slate-600 hover:text-slate-900"
+              }`}
+            >
+              2030 (43.33%)
+            </button>
+          </div>
         </div>
       </div>
 

@@ -51,7 +51,9 @@ export function SourceTooltip({
       {isOpen && (
         <div
           role="tooltip"
-          className="absolute z-50 bottom-full left-1/2 -translate-x-1/2 mb-2 w-72 md:w-80 p-3 rounded-lg bg-slate-900/95 border border-emerald-500/30 text-slate-200 shadow-2xl backdrop-blur-md text-xs pointer-events-none transition-all animate-in fade-in zoom-in-95"
+          onMouseEnter={() => setIsOpen(true)}
+          onMouseLeave={() => setIsOpen(false)}
+          className="absolute z-50 bottom-full left-1/2 -translate-x-1/2 mb-2 w-72 md:w-80 p-3 rounded-lg bg-slate-900/95 border border-emerald-500/30 text-slate-200 shadow-2xl backdrop-blur-md text-xs pointer-events-auto transition-all animate-in fade-in zoom-in-95"
         >
           <div className="flex items-start justify-between gap-2 border-b border-slate-800 pb-1.5 mb-1.5">
             <span className="font-semibold text-emerald-300 flex items-center gap-1">
@@ -72,9 +74,17 @@ export function SourceTooltip({
             {citation.description}
           </p>
           {citation.url && (
-            <div className="mt-1.5 pt-1.5 border-t border-slate-800/80 flex items-center gap-1 text-[10px] text-emerald-400">
-              <ExternalLink className="w-3 h-3" />
-              <span>Official Reference Available</span>
+            <div className="mt-2 pt-1.5 border-t border-slate-800 flex items-center justify-between text-[11px]">
+              <span className="text-slate-400">Official Portal:</span>
+              <a
+                href={citation.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-emerald-400 hover:text-emerald-300 underline font-semibold flex items-center gap-1"
+              >
+                <span>Visit Portal</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
             </div>
           )}
         </div>

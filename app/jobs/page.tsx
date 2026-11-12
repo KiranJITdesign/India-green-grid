@@ -17,6 +17,7 @@ import {
   ArrowRight,
   Database,
   ShieldCheck,
+  ExternalLink,
 } from "lucide-react";
 
 export default function GreenJobsPage() {
@@ -126,8 +127,29 @@ export default function GreenJobsPage() {
             Welcome to the green <span className="text-emerald-600">jobs</span> platform.
           </h1>
           <p className="text-xs sm:text-sm text-slate-500 font-medium">
-            Powered by <strong className="text-emerald-800">India Green Grid</strong> & Skill Council for Green Jobs (SCGJ)
+            Powered by <strong className="text-emerald-800">India Green Grid</strong> &{" "}
+            <a
+              href="https://sscgj.in/?utm_source=chatgpt.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-emerald-700 underline font-bold hover:text-emerald-900 inline-flex items-center gap-0.5"
+            >
+              <span>Skill Council for Green Jobs (SCGJ)</span>
+              <ExternalLink className="w-3 h-3" />
+            </a>
           </p>
+
+          <div className="pt-2 flex justify-center">
+            <a
+              href="https://sscgj.in/?utm_source=chatgpt.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-bold shadow-sm transition-colors"
+            >
+              <span>Visit Official SCGJ Portal (sscgj.in)</span>
+              <ExternalLink className="w-3.5 h-3.5 text-emerald-700" />
+            </a>
+          </div>
         </div>
 
         {/* 3 Prominent Colored Feature Blocks matching Reference Image 3 */}
@@ -154,27 +176,32 @@ export default function GreenJobsPage() {
             </div>
           </div>
 
-          {/* Card 2: Learn (Warm Orange #f97316) */}
-          <div
-            onClick={() => {
-              setSelectedExperience("Entry Level (0-2 yrs)");
-              const el = document.getElementById("jobs-listings");
-              el?.scrollIntoView({ behavior: "smooth" });
-            }}
+          {/* Card 2: Learn (Warm Orange #f97316 - redirects to official SCGJ training portal) */}
+          <a
+            href="https://sscgj.in/?utm_source=chatgpt.com"
+            target="_blank"
+            rel="noopener noreferrer"
             className="bg-[#f97316] hover:bg-[#ea580c] text-white rounded-2xl p-6 text-left shadow-sm transition-all cursor-pointer flex flex-col justify-between min-h-[160px] group"
+            title="Redirect to SCGJ Training & Certification Portal"
           >
-            <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center mb-4">
-              <GraduationCap className="w-5 h-5 text-white" />
+            <div className="flex items-center justify-between">
+              <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center mb-4">
+                <GraduationCap className="w-5 h-5 text-white" />
+              </div>
+              <ExternalLink className="w-4 h-4 text-white/80 group-hover:text-white" />
             </div>
             <div>
-              <h3 className="text-xl font-bold tracking-tight mb-1">
-                Learn
-              </h3>
+              <div className="flex items-center gap-1.5 mb-1">
+                <h3 className="text-xl font-bold tracking-tight">
+                  Learn
+                </h3>
+                <span className="text-[10px] bg-white/20 px-1.5 py-0.2 rounded font-semibold">External ↗</span>
+              </div>
               <p className="text-xs text-white/90 leading-snug">
-                Gain access to accredited clean energy training programmes.
+                Gain access to accredited clean energy training programmes on sscgj.in.
               </p>
             </div>
-          </div>
+          </a>
 
           {/* Card 3: Explore (Dark Forest Green #064e3b) */}
           <div

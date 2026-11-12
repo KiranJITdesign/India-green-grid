@@ -24,6 +24,7 @@ export const DATA_CITATIONS: Record<string, SourceCitation> = {
     title: "Monthly Generation & Fuel Mix Report (CEA 2026 Baseline)",
     publisher: "Central Electricity Authority (CEA), Ministry of Power",
     year: 2026,
+    url: "https://npp.gov.in/landing-home",
     description: "Official fuel-wise monthly gross electricity generation statistics across India."
   },
   CEA_CAPACITY_2024_2026: {
@@ -32,6 +33,7 @@ export const DATA_CITATIONS: Record<string, SourceCitation> = {
     title: "All India Installed Capacity of Generating Stations",
     publisher: "Central Electricity Authority (CEA)",
     year: 2024,
+    url: "https://npp.gov.in/landing-home",
     description: "209.63 GW non-fossil capacity recorded in 2024, compounding at 10.79% YoY."
   },
   MOP_RPO_TRAJECTORY: {
@@ -40,6 +42,7 @@ export const DATA_CITATIONS: Record<string, SourceCitation> = {
     title: "Trajectory for Renewable Purchase Obligation (RPO) and Energy Storage Obligation (ESO) up to 2029-30",
     publisher: "Ministry of Power, Government of India",
     year: 2024,
+    url: "https://www.powermin.gov.in/",
     description: "Mandatory uniform RPO targets: 29.91% for FY 2024-25, scaling to 43.33% by 2029-30."
   },
   CABINET_GEC_III: {
@@ -48,6 +51,7 @@ export const DATA_CITATIONS: Record<string, SourceCitation> = {
     title: "Cabinet approves Green Energy Corridor (GEC) Phase-III Scheme for Inter-State Transmission",
     publisher: "Press Information Bureau (PIB), Cabinet Committee on Economic Affairs",
     year: 2024,
+    url: "https://www.powermin.gov.in/",
     description: "₹1,86,405 Cr outlay enabling 135 GW RE evacuation and 50 GWh battery storage capacity."
   },
   MNRE_SURYA_GHAR: {
@@ -56,7 +60,26 @@ export const DATA_CITATIONS: Record<string, SourceCitation> = {
     title: "PM Surya Ghar: Muft Bijli Yojana National Operational Guidelines",
     publisher: "Ministry of New and Renewable Energy (MNRE)",
     year: 2024,
+    url: "https://pmsuryaghar.gov.in/#/",
     description: "Central financial assistance: ₹30,000/kW for 1st 2 kW, ₹18,000 for 3rd kW, capped at ₹78,000."
+  },
+  SCGJ_OFFICIAL: {
+    id: "SCGJ_OFFICIAL",
+    shortLabel: "Skill Council for Green Jobs (SCGJ)",
+    title: "National Skill Council for Green Jobs Official Platform",
+    publisher: "Skill Council for Green Jobs (SCGJ)",
+    year: 2026,
+    url: "https://sscgj.in/?utm_source=chatgpt.com",
+    description: "India's apex body for green skills training, standards, and clean energy careers."
+  },
+  IREDA_OFFICIAL: {
+    id: "IREDA_OFFICIAL",
+    shortLabel: "IREDA Web Portal",
+    title: "Indian Renewable Energy Development Agency Concessional Lending",
+    publisher: "IREDA, Ministry of New and Renewable Energy",
+    year: 2026,
+    url: "https://ireda.in/IredaWebPortal/",
+    description: "Government non-banking financial institution promoting clean energy projects."
   },
   TARGET_2035: {
     id: "TARGET_2035",
@@ -64,6 +87,7 @@ export const DATA_CITATIONS: Record<string, SourceCitation> = {
     title: "Long-Term Low-Emission Development Strategy & National Electricity Plan Target",
     publisher: "Government of India / UNFCCC Submission",
     year: 2026,
+    url: "https://www.powermin.gov.in/",
     description: "India's expanded long-term non-fossil fuel capacity target of 900 GW by 2035."
   }
 };
@@ -676,6 +700,7 @@ export interface GreenLoanScheme {
   eligibleBorrowers: string;
   keyFeature: string;
   applyUrlLabel: string;
+  applyUrl: string;
 }
 
 export const GREEN_FINANCE_SCHEMES: GreenLoanScheme[] = [
@@ -690,7 +715,8 @@ export const GREEN_FINANCE_SCHEMES: GreenLoanScheme[] = [
     processingFee: "Zero processing fee for loans up to 3 kW",
     eligibleBorrowers: "Individual homeowners with net annual income > ₹3 Lakhs",
     keyFeature: "Direct integration with National PM Surya Ghar Portal for auto-disbursement",
-    applyUrlLabel: "Apply via JanSamarth / SBI YONO"
+    applyUrlLabel: "Apply via JanSamarth / SBI YONO",
+    applyUrl: "https://pmsuryaghar.gov.in/#/"
   },
   {
     id: "ireda-rooftop",
@@ -703,7 +729,8 @@ export const GREEN_FINANCE_SCHEMES: GreenLoanScheme[] = [
     processingFee: "0.25% of sanctioned loan",
     eligibleBorrowers: "Commercial establishments, MSMEs, industrial clusters",
     keyFeature: "Up to 75% project debt financing for solar, wind & small hydro projects",
-    applyUrlLabel: "Apply via IREDA Portal"
+    applyUrlLabel: "Apply via IREDA Web Portal",
+    applyUrl: "https://ireda.in/IredaWebPortal/"
   },
   {
     id: "pnb-solar",
@@ -716,7 +743,8 @@ export const GREEN_FINANCE_SCHEMES: GreenLoanScheme[] = [
     processingFee: "Waived under green banking initiative",
     eligibleBorrowers: "Salaried, self-employed, farmers with residential property",
     keyFeature: "Disbursement directly to empaneled MNRE vendor with verification",
-    applyUrlLabel: "Apply via PNB ONE App"
+    applyUrlLabel: "Apply via PNB ONE App",
+    applyUrl: "https://pmsuryaghar.gov.in/#/"
   },
   {
     id: "sidbi-4e",
@@ -729,6 +757,7 @@ export const GREEN_FINANCE_SCHEMES: GreenLoanScheme[] = [
     processingFee: "0.10% nominal fee",
     eligibleBorrowers: "Manufacturing MSMEs reducing electricity procurement",
     keyFeature: "Includes free technical walk-through energy audit by accredited experts",
-    applyUrlLabel: "Apply via SIDBI Mitra"
+    applyUrlLabel: "Apply via IREDA / SIDBI Portal",
+    applyUrl: "https://ireda.in/IredaWebPortal/"
   }
 ];
