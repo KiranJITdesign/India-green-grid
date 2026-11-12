@@ -1,6 +1,23 @@
 {
   "rpoAudits": [
     {
+      "discomName": "BESCOM (Bangalore Electricity)",
+      "state": "Karnataka",
+      "totalProcuredMWh": 32500000,
+      "renewableProcuredMWh": 11450000,
+      "targetYear": "FY 2024-25 Target (29.91%)",
+      "targetPercent": 29.91,
+      "compliancePercent": 35.23,
+      "isCompliant": true,
+      "shortfallUnitsMWh": 0,
+      "surplusUnitsMWh": 1729250,
+      "estimatedPenaltyINR": 0,
+      "statusLabel": "Compliant (Surplus)",
+      "submittedBy": "State Regulatory Commission Officer",
+      "id": "AUDIT-2026-007",
+      "createdAt": "2026-11-12T06:52:37.622Z"
+    },
+    {
       "discomName": "Torrent Power (Test)",
       "state": "Gujarat",
       "totalProcuredMWh": 10000000,
@@ -803,5 +820,5 @@
       "applyUrlLabel": "Apply via SIDBI Mitra"
     }
   ],
-  "lastUpdated": "2026-11-12T06:15:26.970Z"
+  "lastUpdated": "2026-11-12T06:52:37.623Z"
 }
