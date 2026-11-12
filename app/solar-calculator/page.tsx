@@ -13,25 +13,34 @@ import {
 import { SolarCashflowChart } from "@/components/charts/SolarCashflowChart";
 import { SourceTooltip } from "@/components/SourceTooltip";
 import {
-  SunMedium,
-  IndianRupee,
-  Maximize2,
-  MapPin,
-  AlertTriangle,
-  Coins,
+  Sun,
+  Building,
+  Users,
+  Lightbulb,
+  Home,
+  CircleDollarSign,
+  Zap,
+  ExternalLink,
   ShieldCheck,
-  ArrowRight,
-  Database,
   Send,
   X,
   CheckCircle2,
+  ArrowRight,
 } from "lucide-react";
 
 export default function SolarCalculatorPage() {
-  // Inputs
-  const [monthlyBill, setMonthlyBill] = useState<number>(2400); // Default ₹2,400/month
-  const [roofSqFt, setRoofSqFt] = useState<number>(350); // Default 350 sq ft
-  const [selectedLocation, setSelectedLocation] = useState<string>("Ahmedabad");
+  // Image 2 Form Fields
+  const [selectedState, setSelectedState] = useState<string>("Gujarat");
+  const [customerCategory, setCustomerCategory] = useState<string>("Residential");
+  const [monthlyBill, setMonthlyBill] = useState<number>(3500); // Image 2 default: 3500
+
+  // Optional accuracy fields
+  const [roofAreaSqM, setRoofAreaSqM] = useState<number>(51); // Image 2 default: 51 sq.m (~550 sq.ft)
+  const [investmentBudget, setInvestmentBudget] = useState<number>(48000); // Image 2 default: 48000
+  const [desiredCapacityKw, setDesiredCapacityKw] = useState<number>(3); // Image 2 default: 3 kW
+
+  // Conversion: 1 sq.m ≈ 10.764 sq.ft
+  const roofSqFt = Math.round(roofAreaSqM * 10.764);
 
   // Registration modal state
   const [showRegisterModal, setShowRegisterModal] = useState<boolean>(false);
@@ -41,29 +50,37 @@ export default function SolarCalculatorPage() {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [registeredAppNumber, setRegisteredAppNumber] = useState<string | null>(null);
 
-  // Calculate results using the exact logic engine
+  // Exact statutory calculation
   const result: SolarCalculationResult = calculateSolarROI({
     monthlyBill,
     roofSqFt,
-    location: selectedLocation,
+    location: selectedState,
   });
 
-  const locationInfo =
-    POPULAR_LOCATIONS.find((l) => l.city === selectedLocation) || POPULAR_LOCATIONS[0];
-
-  // Bill presets for rapid exploration
-  const billPresets = [
-    { label: "₹1,200/mo", bill: 1200, roof: 200, tip: "Small 1-2 BHK (~1.5 kW)" },
-    { label: "₹2,400/mo", bill: 2400, roof: 350, tip: "Standard 3 BHK (~3 kW)" },
-    { label: "₹4,000/mo", bill: 4000, roof: 600, tip: "Large Villa (~5 kW)" },
-    { label: "₹7,200/mo", bill: 7200, roof: 1100, tip: "High AC / Commercial (~10 kW)" },
+  const allStates = [
+    "Bihar",
+    "Gujarat",
+    "Karnataka",
+    "Rajasthan",
+    "Delhi",
+    "Maharashtra",
+    "Tamil Nadu",
+    "Uttar Pradesh",
+    "Telangana",
+    "West Bengal",
+    "Haryana",
+    "Punjab",
+    "Madhya Pradesh",
+    "Kerala",
+    "Odisha",
+    "Assam",
   ];
 
-  // Submit consumer application to backend
+  // Submit to backend API
   const handleRegisterSubsidy = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!consumerName || !phone) {
-      alert("Please provide both name and contact mobile number");
+      alert("Please enter applicant name and phone");
       return;
     }
 
@@ -76,8 +93,8 @@ export default function SolarCalculatorPage() {
           consumerName,
           phone,
           email,
-          city: locationInfo.city,
-          state: locationInfo.state,
+          city: selectedState,
+          state: selectedState,
           monthlyBill,
           roofSqFt,
         }),
@@ -97,351 +114,320 @@ export default function SolarCalculatorPage() {
   };
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-500">
-      {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-5">
-        <div>
-          <div className="flex items-center gap-2 mb-1">
-            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
-              <SunMedium className="w-3.5 h-3.5 text-emerald-400" />
-              PM Surya Ghar: Muft Bijli Yojana
-            </span>
-            <span className="inline-flex items-center gap-1 text-[11px] text-emerald-400 font-semibold bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800/40">
-              <Database className="w-3 h-3" />
-              Backend Connected
-            </span>
-            <SourceTooltip citationId="MNRE_SURYA_GHAR" />
+    <div className="space-y-6 animate-in fade-in duration-300">
+      {/* Centered Solar Rooftop Calculator Container matching Reference Image 2 */}
+      <div className="max-w-4xl mx-auto bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-10 shadow-sm">
+        {/* Header Icon & Title */}
+        <div className="text-center space-y-2 mb-8">
+          <div className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center mx-auto">
+            <Sun className="w-6 h-6 text-emerald-700" />
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-            Rooftop Solar ROI & Subsidy Calculator
+
+          <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+            Solar Rooftop Calculator
           </h1>
-          <p className="text-xs sm:text-sm text-slate-400 mt-1">
-            Estimate recommended system size, Central Government subsidy, bill savings, and register your application.
+
+          <p className="text-xs sm:text-sm text-slate-500 max-w-xl mx-auto">
+            Estimate your solar system size, cost, subsidy, and savings as per the PM Surya Ghar Yojana.
           </p>
         </div>
 
-        <div className="flex items-center gap-2 self-start md:self-auto">
+        {/* Two-Column Form Layout matching Reference Image 2 */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Left Column: Required Details */}
+          <div className="space-y-6">
+            <h3 className="text-xs font-bold text-indigo-900 uppercase tracking-wider">
+              Please enter the following details
+            </h3>
+
+            {/* State Dropdown */}
+            <div className="space-y-1.5">
+              <label className="flex items-center gap-1.5 text-xs font-semibold text-slate-700">
+                <Building className="w-3.5 h-3.5 text-slate-500" />
+                <span>Your State <span className="text-red-500">*</span></span>
+              </label>
+              <select
+                value={selectedState}
+                onChange={(e) => setSelectedState(e.target.value)}
+                className="w-full bg-white border border-slate-300 rounded-lg px-3.5 py-2 text-xs text-slate-800 focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600"
+              >
+                {allStates.map((st) => (
+                  <option key={st} value={st}>
+                    {st}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Category of Customer */}
+            <div className="space-y-1.5">
+              <label className="flex items-center gap-1.5 text-xs font-semibold text-slate-700">
+                <Users className="w-3.5 h-3.5 text-slate-500" />
+                <span>Category of Customer <span className="text-red-500">*</span></span>
+              </label>
+              <select
+                value={customerCategory}
+                onChange={(e) => setCustomerCategory(e.target.value)}
+                className="w-full bg-white border border-slate-300 rounded-lg px-3.5 py-2 text-xs text-slate-800 focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600"
+              >
+                <option value="Residential">Residential</option>
+                <option value="Commercial">Commercial</option>
+                <option value="Industrial">Industrial</option>
+                <option value="Institutional">Institutional / NGO</option>
+              </select>
+            </div>
+
+            {/* Average Monthly Bill with Slider */}
+            <div className="space-y-1.5">
+              <label className="flex items-center justify-between text-xs font-semibold text-slate-700">
+                <span className="flex items-center gap-1.5">
+                  <Lightbulb className="w-3.5 h-3.5 text-slate-500" />
+                  <span>Average Monthly Bill (₹) <span className="text-red-500">*</span></span>
+                </span>
+                <span className="font-mono text-emerald-800 font-bold">₹{monthlyBill}</span>
+              </label>
+              <input
+                type="number"
+                min={300}
+                max={50000}
+                step={100}
+                value={monthlyBill}
+                onChange={(e) => setMonthlyBill(Math.max(0, Number(e.target.value) || 0))}
+                className="w-full bg-white border border-slate-300 rounded-lg px-3.5 py-2 text-xs font-mono text-slate-800 focus:outline-none focus:border-emerald-600"
+              />
+              <input
+                type="range"
+                min={500}
+                max={15000}
+                step={100}
+                value={monthlyBill}
+                onChange={(e) => setMonthlyBill(Number(e.target.value))}
+                className="w-full accent-emerald-700 cursor-pointer"
+              />
+            </div>
+          </div>
+
+          {/* Right Column: Enter Details for More Accuracy (Optional) */}
+          <div className="space-y-6">
+            <h3 className="text-xs font-bold text-indigo-900 uppercase tracking-wider">
+              Enter Details for More Accuracy (Optional)
+            </h3>
+
+            {/* Roof Top Area */}
+            <div className="space-y-1.5">
+              <label className="flex items-center justify-between text-xs font-semibold text-slate-700">
+                <span className="flex items-center gap-1.5">
+                  <Home className="w-3.5 h-3.5 text-slate-500" />
+                  <span>Roof Top Area (sq.m)</span>
+                </span>
+                <span className="font-mono text-slate-600">{roofAreaSqM} sq.m (~{roofSqFt} sq.ft)</span>
+              </label>
+              <input
+                type="number"
+                min={10}
+                max={2000}
+                value={roofAreaSqM}
+                onChange={(e) => setRoofAreaSqM(Math.max(1, Number(e.target.value) || 0))}
+                className="w-full bg-white border border-slate-300 rounded-lg px-3.5 py-2 text-xs font-mono text-slate-800 focus:outline-none focus:border-emerald-600"
+              />
+              <input
+                type="range"
+                min={10}
+                max={250}
+                value={roofAreaSqM}
+                onChange={(e) => setRoofAreaSqM(Number(e.target.value))}
+                className="w-full accent-emerald-700 cursor-pointer"
+              />
+            </div>
+
+            {/* Investment Budget */}
+            <div className="space-y-1.5">
+              <label className="flex items-center justify-between text-xs font-semibold text-slate-700">
+                <span className="flex items-center gap-1.5">
+                  <CircleDollarSign className="w-3.5 h-3.5 text-slate-500" />
+                  <span>Investment Budget (₹)</span>
+                </span>
+                <span className="font-mono text-slate-600">₹{investmentBudget.toLocaleString()}</span>
+              </label>
+              <input
+                type="number"
+                min={10000}
+                max={1000000}
+                step={5000}
+                value={investmentBudget}
+                onChange={(e) => setInvestmentBudget(Math.max(0, Number(e.target.value) || 0))}
+                className="w-full bg-white border border-slate-300 rounded-lg px-3.5 py-2 text-xs font-mono text-slate-800 focus:outline-none focus:border-emerald-600"
+              />
+              <input
+                type="range"
+                min={20000}
+                max={250000}
+                step={5000}
+                value={investmentBudget}
+                onChange={(e) => setInvestmentBudget(Number(e.target.value))}
+                className="w-full accent-emerald-700 cursor-pointer"
+              />
+            </div>
+
+            {/* Desired Plant Capacity */}
+            <div className="space-y-1.5">
+              <label className="flex items-center justify-between text-xs font-semibold text-slate-700">
+                <span className="flex items-center gap-1.5">
+                  <Zap className="w-3.5 h-3.5 text-slate-500" />
+                  <span>Desired Plant Capacity (kW)</span>
+                </span>
+                <span className="font-mono text-slate-600">{desiredCapacityKw} kW</span>
+              </label>
+              <input
+                type="number"
+                min={1}
+                max={50}
+                step={0.5}
+                value={desiredCapacityKw}
+                onChange={(e) => setDesiredCapacityKw(Math.max(0.5, Number(e.target.value) || 0))}
+                className="w-full bg-white border border-slate-300 rounded-lg px-3.5 py-2 text-xs font-mono text-slate-800 focus:outline-none focus:border-emerald-600"
+              />
+              <input
+                type="range"
+                min={1}
+                max={10}
+                step={0.5}
+                value={desiredCapacityKw}
+                onChange={(e) => setDesiredCapacityKw(Number(e.target.value))}
+                className="w-full accent-emerald-700 cursor-pointer"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Center Calculate Button matching Reference Image 2 */}
+        <div className="mt-8 pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <button
+            type="button"
+            onClick={() => {
+              // Smooth scroll to output
+              const el = document.getElementById("results-panel");
+              el?.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="w-full sm:w-auto px-10 py-2.5 rounded-full bg-[#064e3b] hover:bg-[#043d2e] text-white font-bold text-xs shadow-md transition-all"
+          >
+            Calculate
+          </button>
           <button
             type="button"
             onClick={() => setShowRegisterModal(true)}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-500 hover:bg-emerald-400 text-slate-950 transition-colors shadow-md shadow-emerald-500/20"
+            className="w-full sm:w-auto px-6 py-2.5 rounded-full border border-emerald-700 text-emerald-800 hover:bg-emerald-50 font-bold text-xs transition-colors"
           >
-            <Send className="w-3.5 h-3.5" />
-            <span>Register for Subsidy</span>
+            Register Subsidy Application
           </button>
-          <Link
-            href="/green-finance"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 transition-colors shadow-sm"
-          >
-            <Coins className="w-3.5 h-3.5 text-amber-400" />
-            <span>7% Solar Loans</span>
-          </Link>
+        </div>
+
+        {/* Footer Reference Link matching Reference Image 2 */}
+        <div className="mt-8 pt-4 border-t border-slate-100 flex items-center justify-center gap-2 text-xs text-slate-500 text-center flex-wrap">
+          <span>🇮🇳</span>
+          <span className="hover:text-emerald-700 font-medium">
+            pmsolarpanelyojana.com • Solar Rooftop Calculator 2026 - PM Surya Ghar Yojana
+          </span>
+          <ExternalLink className="w-3.5 h-3.5" />
         </div>
       </div>
 
-      {/* Preset Quick Select Row */}
-      <section className="flex items-center gap-2 overflow-x-auto pb-1">
-        <span className="text-xs text-slate-400 shrink-0 font-medium">Quick Scenarios:</span>
-        {billPresets.map((preset) => (
-          <button
-            key={preset.label}
-            onClick={() => {
-              setMonthlyBill(preset.bill);
-              setRoofSqFt(preset.roof);
-            }}
-            className={`px-3 py-1.5 rounded-xl text-xs font-medium border shrink-0 transition-all ${
-              monthlyBill === preset.bill
-                ? "bg-emerald-950 text-emerald-300 border-emerald-600 font-bold shadow-sm"
-                : "bg-slate-900/60 border-slate-800 text-slate-300 hover:border-slate-700"
-            }`}
-          >
-            <span>{preset.label}</span>
-            <span className="text-[10px] text-slate-500 ml-1.5 hidden sm:inline">
-              ({preset.tip})
-            </span>
-          </button>
-        ))}
-      </section>
-
-      {/* Main Grid: Inputs (5 Cols) and Outputs (7 Cols) */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Left Column: Form Controls */}
-        <div className="lg:col-span-5 bg-slate-900/80 border border-slate-800 rounded-2xl p-5 space-y-6">
-          <div className="flex items-center justify-between pb-3 border-b border-slate-800">
-            <h2 className="font-bold text-white text-base">
-              Rooftop & Consumption Inputs
+      {/* Sizing & Financial Results Card */}
+      <div id="results-panel" className="max-w-4xl mx-auto bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+          <div>
+            <h2 className="text-lg font-bold text-slate-900">
+              System Sizing & Financial Evaluation
             </h2>
-            <span className="text-[11px] text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800/40">
-              Assumes ₹6/unit tariff
+            <p className="text-xs text-slate-500">
+              Assumes ₹6/unit domestic tariff • ~120 units/month per kW installed
+            </p>
+          </div>
+          <div className="text-right">
+            <span className="text-[10px] text-slate-400 uppercase font-semibold">Recommended Capacity</span>
+            <p className="text-2xl font-black text-emerald-700">
+              {result.recommendedKw} kW
+            </p>
+          </div>
+        </div>
+
+        {/* 4 Financial Metric Cards */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div className="bg-slate-50 p-4 rounded-xl border border-slate-200/80">
+            <span className="text-[11px] text-slate-500 block mb-1">Pre-Subsidy Cost</span>
+            <span className="text-xl font-bold text-slate-800">
+              ₹{result.estimatedCost.toLocaleString()}
+            </span>
+            <span className="text-[10px] text-slate-400 block mt-0.5">Benchmark ₹70k/kW</span>
+          </div>
+
+          <div className="bg-emerald-50 p-4 rounded-xl border border-emerald-200">
+            <span className="text-[11px] text-emerald-800 font-semibold block mb-1">PM Surya Ghar Subsidy</span>
+            <span className="text-xl font-black text-emerald-700">
+              ₹{result.subsidy.toLocaleString()}
+            </span>
+            <span className="text-[10px] text-emerald-600 block mt-0.5">
+              {result.breakdown.effectiveSubsidyPercent}% Govt Assistance
             </span>
           </div>
 
-          {/* Location Selector */}
-          <div className="space-y-1.5">
-            <label htmlFor="location-select" className="flex items-center justify-between text-xs font-semibold text-slate-300">
-              <span className="flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5 text-emerald-400" />
-                State / City Location
-              </span>
-              <span className="text-slate-400 text-[11px]">
-                {locationInfo.solarIrradianceKwhM2Day} kWh/m²/day
-              </span>
-            </label>
-            <select
-              id="location-select"
-              value={selectedLocation}
-              onChange={(e) => setSelectedLocation(e.target.value)}
-              className="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500"
-            >
-              {POPULAR_LOCATIONS.map((loc) => (
-                <option key={loc.city} value={loc.city}>
-                  {loc.city}, {loc.state} — DISCOM: {loc.stateDiscom}
-                </option>
-              ))}
-            </select>
-            {locationInfo.stateTopUpSubsidyNote && (
-              <p className="text-[11px] text-emerald-300/80 bg-emerald-950/30 px-2 py-1 rounded border border-emerald-900/30">
-                {locationInfo.stateTopUpSubsidyNote}
-              </p>
-            )}
+          <div className="bg-slate-50 p-4 rounded-xl border border-slate-200/80">
+            <span className="text-[11px] text-slate-500 block mb-1">Net Cost to Owner</span>
+            <span className="text-xl font-bold text-slate-900">
+              ₹{result.netCost.toLocaleString()}
+            </span>
+            <span className="text-[10px] text-slate-400 block mt-0.5">Payable to empaneled vendor</span>
           </div>
 
-          {/* Monthly Bill Input */}
-          <div className="space-y-2">
-            <div className="flex items-center justify-between text-xs">
-              <label htmlFor="bill-input" className="font-semibold text-slate-300 flex items-center gap-1">
-                <IndianRupee className="w-3.5 h-3.5 text-emerald-400" />
-                Average Monthly Electricity Bill
-              </label>
-              <span className="text-emerald-400 font-mono font-bold text-sm">
-                ₹{monthlyBill.toLocaleString()}
-              </span>
-            </div>
-            <input
-              id="bill-input"
-              type="number"
-              min={300}
-              max={100000}
-              step={100}
-              value={monthlyBill}
-              onChange={(e) => setMonthlyBill(Math.max(0, Number(e.target.value) || 0))}
-              className="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white font-mono focus:outline-none focus:border-emerald-500"
-            />
-            <input
-              type="range"
-              min={500}
-              max={15000}
-              step={100}
-              value={monthlyBill}
-              onChange={(e) => setMonthlyBill(Number(e.target.value))}
-              className="w-full cursor-pointer"
-            />
-            <div className="flex justify-between text-[10px] text-slate-400">
-              <span>Estimated Consumption: <strong className="text-slate-200">{result.estimatedUnits} units/month</strong></span>
-              <span>Formula: Bill / ₹6</span>
-            </div>
-          </div>
-
-          {/* Available Roof Area Input */}
-          <div className="space-y-2">
-            <div className="flex items-center justify-between text-xs">
-              <label htmlFor="roof-input" className="font-semibold text-slate-300 flex items-center gap-1">
-                <Maximize2 className="w-3.5 h-3.5 text-cyan-400" />
-                Available Shadow-Free Roof Space (sq ft)
-              </label>
-              <span className="text-cyan-400 font-mono font-bold text-sm">
-                {roofSqFt.toLocaleString()} sq ft
-              </span>
-            </div>
-            <input
-              id="roof-input"
-              type="number"
-              min={50}
-              max={20000}
-              step={25}
-              value={roofSqFt}
-              onChange={(e) => setRoofSqFt(Math.max(0, Number(e.target.value) || 0))}
-              className="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white font-mono focus:outline-none focus:border-emerald-500"
-            />
-            <input
-              type="range"
-              min={50}
-              max={2500}
-              step={25}
-              value={roofSqFt}
-              onChange={(e) => setRoofSqFt(Number(e.target.value))}
-              className="w-full cursor-pointer"
-            />
-            <div className="flex justify-between text-[10px] text-slate-400">
-              <span>Roof Capacity: <strong className="text-slate-200">up to {result.maxSizeFromRoof} kW</strong></span>
-              <span>~105 sq ft required per kW</span>
-            </div>
-          </div>
-
-          {/* Roof constraint warning banner if applicable */}
-          {result.isRoofConstrained && (
-            <div className="p-3 rounded-xl bg-amber-950/40 border border-amber-600/40 text-xs text-amber-200 flex items-start gap-2">
-              <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-              <div>
-                <span className="font-bold">Roof Space Constraint Detected</span>
-                <p className="text-[11px] text-slate-300 mt-0.5">
-                  Your consumption justifies a {result.sizeFromConsumption} kW system, but your roof space ({roofSqFt} sq ft) caps the installation at {result.recommendedKw} kW.
-                </p>
-              </div>
-            </div>
-          )}
-
-          {/* Statutory Subsidy Formula Reference Card */}
-          <div className="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800 text-xs space-y-1 text-slate-300">
-            <div className="flex items-center gap-1.5 text-emerald-400 font-semibold text-[11px]">
-              <ShieldCheck className="w-3.5 h-3.5" />
-              <span>Official PM Surya Ghar Subsidy Slabs (MNRE):</span>
-            </div>
-            <ul className="text-[11px] text-slate-400 space-y-0.5 list-disc list-inside">
-              <li>First 2 kW: <strong className="text-slate-200">₹30,000 per kW</strong> (₹60,000 for 2 kW)</li>
-              <li>3rd kW: <strong className="text-slate-200">+₹18,000</strong></li>
-              <li>Cap: <strong className="text-slate-200">₹78,000</strong> for systems 3 kW and larger</li>
-              <li>Benchmark Cost: <strong className="text-slate-200">₹70,000 per kW</strong></li>
-            </ul>
+          <div className="bg-slate-50 p-4 rounded-xl border border-slate-200/80">
+            <span className="text-[11px] text-slate-500 block mb-1">Payback Period</span>
+            <span className="text-xl font-black text-emerald-800">
+              {result.paybackYears} Years
+            </span>
+            <span className="text-[10px] text-slate-400 block mt-0.5">25-year panel lifecycle</span>
           </div>
         </div>
 
-        {/* Right Column: Output Summary & Sizing Cards */}
-        <div className="lg:col-span-7 bg-slate-900/80 border border-slate-800 rounded-2xl p-5 space-y-6 flex flex-col justify-between">
-          <div className="flex items-center justify-between pb-3 border-b border-slate-800">
-            <div>
-              <h2 className="font-bold text-white text-base">
-                Recommended System & Financial Analysis
-              </h2>
-              <p className="text-xs text-slate-400">
-                Calculated strictly adhering to CodeSpark 2026 problem formulas
-              </p>
-            </div>
-            <div className="text-right">
-              <span className="text-[10px] text-slate-500 uppercase font-semibold">Recommended Size</span>
-              <p className="text-xl font-black text-emerald-400">
-                {result.recommendedKw} kW
-              </p>
-            </div>
+        {/* Savings & Cashflow */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-4 rounded-xl bg-slate-50 border border-slate-200/80 text-xs">
+          <div>
+            <span className="text-slate-500 block">Monthly Yield & Consumption</span>
+            <span className="text-sm font-bold text-slate-800">
+              ~{result.monthlyGeneration} units / mo
+            </span>
           </div>
-
-          {/* 4 Financial Metric Cards */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {/* Metric 1: Benchmark Cost */}
-            <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800">
-              <span className="text-[10px] text-slate-400 block mb-0.5">Pre-Subsidy Cost</span>
-              <span className="text-lg font-bold text-slate-200">
-                ₹{result.estimatedCost.toLocaleString()}
-              </span>
-              <span className="text-[10px] text-slate-400 block mt-0.5">@ ₹70k/kW</span>
-            </div>
-
-            {/* Metric 2: PM Surya Ghar Subsidy */}
-            <div className="bg-emerald-950/40 p-3 rounded-xl border border-emerald-800/50">
-              <span className="text-[10px] text-emerald-400 block mb-0.5">Govt Subsidy</span>
-              <span className="text-lg font-black text-emerald-400">
-                ₹{result.subsidy.toLocaleString()}
-              </span>
-              <span className="text-[10px] text-emerald-300 block mt-0.5">
-                {result.breakdown.effectiveSubsidyPercent}% covered
-              </span>
-            </div>
-
-            {/* Metric 3: Net Out-of-Pocket Cost */}
-            <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800">
-              <span className="text-[10px] text-slate-400 block mb-0.5">Net Cost</span>
-              <span className="text-lg font-bold text-white">
-                ₹{result.netCost.toLocaleString()}
-              </span>
-              <span className="text-[10px] text-slate-400 block mt-0.5">Payable to vendor</span>
-            </div>
-
-            {/* Metric 4: Payback Period */}
-            <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800">
-              <span className="text-[10px] text-slate-400 block mb-0.5">Payback Period</span>
-              <span className="text-lg font-black text-cyan-400">
-                {result.paybackYears} Years
-              </span>
-              <span className="text-[10px] text-slate-400 block mt-0.5">25-yr panel life</span>
-            </div>
+          <div>
+            <span className="text-slate-500 block">Monthly Bill Savings</span>
+            <span className="text-sm font-bold text-emerald-700">
+              ₹{result.monthlySavings.toLocaleString()} / month
+            </span>
           </div>
-
-          {/* Generation & Savings Breakdown */}
-          <div className="p-4 rounded-xl bg-slate-950/90 border border-slate-800/90 space-y-3">
-            <div className="flex items-center justify-between text-xs font-semibold text-slate-200 border-b border-slate-800/80 pb-2">
-              <span>Operational Savings Telemetry</span>
-              <span className="text-emerald-400">Monthly Yield: ~{result.monthlyGeneration} units</span>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-              <div>
-                <span className="text-slate-400 text-[11px] block">Monthly Bill Savings</span>
-                <span className="text-base font-bold text-emerald-400">
-                  ₹{result.monthlySavings.toLocaleString()}/mo
-                </span>
-              </div>
-              <div>
-                <span className="text-slate-400 text-[11px] block">Annual Direct Savings</span>
-                <span className="text-base font-bold text-white">
-                  ₹{result.annualSavings.toLocaleString()}/yr
-                </span>
-              </div>
-              <div>
-                <span className="text-slate-400 text-[11px] block">25-Yr Lifetime Net Savings</span>
-                <span className="text-base font-bold text-cyan-400">
-                  ₹{(result.lifetimeSavings25Years / 100000).toFixed(2)} Lakhs
-                </span>
-              </div>
-            </div>
-
-            <div className="pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400">
-              <span>CO2 Emissions Avoided: <strong className="text-emerald-300">{result.co2AvoidedTonsPerYear} tons/year</strong></span>
-              <SourceTooltip citationId="CEA_GENERATION_2026" inlineText="0.82 kg/kWh Factor" />
-            </div>
+          <div>
+            <span className="text-slate-500 block">25-Year Net Cumulative Savings</span>
+            <span className="text-sm font-bold text-emerald-800">
+              ₹{(result.lifetimeSavings25Years / 100000).toFixed(2)} Lakhs
+            </span>
           </div>
+        </div>
 
-          {/* Cashflow Projection Chart */}
-          <div className="space-y-2">
-            <div className="flex items-center justify-between text-xs">
-              <span className="font-semibold text-slate-300">
-                Cumulative Net Cashflow (Years 0 - 25)
-              </span>
-              <span className="text-[11px] text-slate-400">
-                Break-even occurs at {result.paybackYears} years
-              </span>
-            </div>
-            <SolarCashflowChart result={result} />
-          </div>
-
-          {/* Action Row */}
-          <div className="pt-3 border-t border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
-            <button
-              onClick={() => setShowRegisterModal(true)}
-              className="py-2 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs flex items-center gap-1.5 shadow-md shadow-emerald-500/20"
-            >
-              <Send className="w-3.5 h-3.5" />
-              <span>Submit Subsidy Registration to Database</span>
-            </button>
-            <Link
-              href="/green-finance"
-              className="text-emerald-400 hover:text-emerald-300 font-bold inline-flex items-center gap-1 text-xs"
-            >
-              <span>Explore Concessional Solar Financing</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
+        {/* Cashflow Chart */}
+        <div>
+          <h4 className="text-xs font-semibold text-slate-700 mb-2">
+            25-Year Net Cashflow Projection
+          </h4>
+          <SolarCashflowChart result={result} />
         </div>
       </div>
 
-      {/* Registration Modal */}
+      {/* Subsidy Registration Modal */}
       {showRegisterModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in">
-          <div className="bg-slate-900 border border-emerald-500/30 rounded-2xl max-w-lg w-full p-6 shadow-2xl overflow-y-auto max-h-[90vh]">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in">
+          <div className="bg-white border border-slate-200 rounded-2xl max-w-lg w-full p-6 shadow-2xl text-slate-800">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
               <div className="flex items-center gap-2">
-                <SunMedium className="w-5 h-5 text-emerald-400" />
-                <h3 className="text-base font-bold text-white">
-                  PM Surya Ghar Consumer Subsidy Registration
+                <Sun className="w-5 h-5 text-emerald-700" />
+                <h3 className="font-bold text-base text-slate-900">
+                  Register for PM Surya Ghar Subsidy
                 </h3>
               </div>
               <button
@@ -449,7 +435,7 @@ export default function SolarCalculatorPage() {
                   setShowRegisterModal(false);
                   setRegisteredAppNumber(null);
                 }}
-                className="p-1 rounded-lg text-slate-400 hover:text-white"
+                className="p-1 rounded-lg text-slate-400 hover:text-slate-600"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -457,23 +443,23 @@ export default function SolarCalculatorPage() {
 
             {registeredAppNumber ? (
               <div className="text-center py-6 space-y-4">
-                <div className="w-12 h-12 rounded-full bg-emerald-500/20 border border-emerald-500 text-emerald-400 flex items-center justify-center mx-auto">
+                <div className="w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto">
                   <CheckCircle2 className="w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="text-lg font-bold text-white">Registration Successful!</h4>
-                  <p className="text-xs text-slate-400 mt-1">
-                    Your consumer application has been stored in the persistent database.
+                  <h4 className="text-lg font-bold text-slate-900">Application Submitted!</h4>
+                  <p className="text-xs text-slate-500 mt-1">
+                    Your PM Surya Ghar subsidy application has been stored in the persistent database.
                   </p>
                 </div>
-                <div className="p-3 rounded-xl bg-slate-950 border border-slate-800">
-                  <span className="text-[10px] text-slate-500 block uppercase font-bold">Official Application Number</span>
-                  <span className="text-lg font-mono font-bold text-emerald-400">{registeredAppNumber}</span>
+                <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
+                  <span className="text-[10px] text-slate-400 block uppercase font-bold">Registration Number</span>
+                  <span className="text-lg font-mono font-bold text-emerald-700">{registeredAppNumber}</span>
                 </div>
                 <div className="pt-2 flex justify-center gap-3">
                   <Link
                     href="/audits"
-                    className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold"
+                    className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold"
                   >
                     View in Registry
                   </Link>
@@ -482,7 +468,7 @@ export default function SolarCalculatorPage() {
                       setShowRegisterModal(false);
                       setRegisteredAppNumber(null);
                     }}
-                    className="px-4 py-2 rounded-xl bg-emerald-600 text-slate-950 text-xs font-bold"
+                    className="px-4 py-2 rounded-xl bg-[#064e3b] text-white text-xs font-bold"
                   >
                     Done
                   </button>
@@ -490,20 +476,19 @@ export default function SolarCalculatorPage() {
               </div>
             ) : (
               <form onSubmit={handleRegisterSubsidy} className="space-y-4 text-xs">
-                <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800 space-y-1">
-                  <span className="text-[10px] text-slate-400 block">System Configuration Sized</span>
-                  <div className="flex justify-between font-bold text-white">
-                    <span>{result.recommendedKw} kW Rooftop System</span>
-                    <span className="text-emerald-400">Subsidy: ₹{result.subsidy.toLocaleString()}</span>
+                <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-100">
+                  <div className="flex justify-between font-bold text-emerald-900">
+                    <span>{result.recommendedKw} kW Sized System</span>
+                    <span>Subsidy: ₹{result.subsidy.toLocaleString()}</span>
                   </div>
-                  <div className="flex justify-between text-[11px] text-slate-400">
-                    <span>Net Out-of-Pocket: ₹{result.netCost.toLocaleString()}</span>
-                    <span>Location: {locationInfo.city}, {locationInfo.state}</span>
+                  <div className="flex justify-between text-[11px] text-emerald-700 mt-0.5">
+                    <span>State: {selectedState}</span>
+                    <span>Net Cost: ₹{result.netCost.toLocaleString()}</span>
                   </div>
                 </div>
 
                 <div>
-                  <label className="text-slate-300 font-semibold block mb-1">
+                  <label className="text-slate-700 font-semibold block mb-1">
                     Applicant Full Name *
                   </label>
                   <input
@@ -512,14 +497,14 @@ export default function SolarCalculatorPage() {
                     placeholder="e.g. Ramesh Chandra Verma"
                     value={consumerName}
                     onChange={(e) => setConsumerName(e.target.value)}
-                    className="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-emerald-500"
+                    className="w-full border border-slate-300 rounded-lg px-3 py-2 text-slate-800 focus:outline-none focus:border-emerald-600"
                   />
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="text-slate-300 font-semibold block mb-1">
-                      Mobile Number (10 digits) *
+                    <label className="text-slate-700 font-semibold block mb-1">
+                      Mobile Number *
                     </label>
                     <input
                       type="tel"
@@ -527,41 +512,37 @@ export default function SolarCalculatorPage() {
                       placeholder="+91 98765 43210"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      className="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-emerald-500"
+                      className="w-full border border-slate-300 rounded-lg px-3 py-2 text-slate-800 focus:outline-none focus:border-emerald-600"
                     />
                   </div>
                   <div>
-                    <label className="text-slate-300 font-semibold block mb-1">
+                    <label className="text-slate-700 font-semibold block mb-1">
                       Email Address
                     </label>
                     <input
                       type="email"
-                      placeholder="consumer@example.com"
+                      placeholder="applicant@example.com"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-emerald-500"
+                      className="w-full border border-slate-300 rounded-lg px-3 py-2 text-slate-800 focus:outline-none focus:border-emerald-600"
                     />
                   </div>
                 </div>
 
-                <p className="text-[10px] text-slate-500 leading-relaxed">
-                  By submitting, your rooftop specifications and consumer telemetry will be forwarded to empaneled state DISCOM vendors under MNRE National Operational Guidelines.
-                </p>
-
-                <div className="pt-3 border-t border-slate-800 flex justify-end gap-2">
+                <div className="pt-3 border-t border-slate-100 flex justify-end gap-2">
                   <button
                     type="button"
                     onClick={() => setShowRegisterModal(false)}
-                    className="px-4 py-2 rounded-xl text-slate-400 hover:text-white"
+                    className="px-4 py-2 rounded-xl text-slate-500 hover:text-slate-700"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="px-5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 disabled:opacity-50 text-slate-950 font-bold"
+                    className="px-5 py-2 rounded-xl bg-[#064e3b] hover:bg-[#043d2e] disabled:opacity-50 text-white font-bold"
                   >
-                    {isSubmitting ? "Transmitting..." : "Submit Registration"}
+                    {isSubmitting ? "Submitting..." : "Submit Registration"}
                   </button>
                 </div>
               </form>

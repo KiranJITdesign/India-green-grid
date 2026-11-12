@@ -1,0 +1,101 @@
+"use client";
+
+import React, { useState } from "react";
+import { useRole, UserRole } from "./RoleContext";
+import { User, Bell, ChevronDown, ShieldCheck, Sparkles, X } from "lucide-react";
+import { DATA_CITATIONS } from "@/data/energyData";
+
+export function TopHeader() {
+  const { role, setRole } = useRole();
+  const [showNotificationModal, setShowNotificationModal] = useState(false);
+
+  return (
+    <div className="w-full flex items-center justify-end gap-3 py-3 px-6 border-b border-slate-200/80 bg-white/70 backdrop-blur-md sticky top-0 z-30">
+      {/* Role Switcher matching Reference Image 1 */}
+      <div className="flex items-center gap-2 text-xs text-slate-600 font-medium">
+        <span>Role:</span>
+        <div className="relative">
+          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 bg-white hover:border-emerald-500 shadow-sm transition-all cursor-pointer">
+            <User className="w-3.5 h-3.5 text-slate-500" />
+            <select
+              value={role}
+              onChange={(e) => setRole(e.target.value as UserRole)}
+              className="bg-transparent text-xs font-semibold text-slate-800 focus:outline-none cursor-pointer pr-4 appearance-none"
+            >
+              <option value="citizen">Citizen</option>
+              <option value="discom">DISCOM</option>
+              <option value="policymaker">Policymaker</option>
+            </select>
+            <ChevronDown className="w-3.5 h-3.5 text-slate-400 pointer-events-none -ml-3" />
+          </div>
+        </div>
+      </div>
+
+      {/* Bell Notification Icon */}
+      <button
+        onClick={() => setShowNotificationModal(true)}
+        className="relative p-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 hover:text-emerald-700 transition-colors shadow-sm"
+        title="View Grid & Policy Alerts"
+      >
+        <Bell className="w-4 h-4" />
+        <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-emerald-500 ring-2 ring-white"></span>
+      </button>
+
+      {/* Notification / Citations Drawer Modal */}
+      {showNotificationModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in">
+          <div className="bg-white border border-slate-200 rounded-2xl max-w-lg w-full p-6 shadow-2xl text-slate-800">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+              <div className="flex items-center gap-2">
+                <Sparkles className="w-5 h-5 text-emerald-600" />
+                <h3 className="font-bold text-base text-slate-900">
+                  Grid Baseline & Policy Notifications
+                </h3>
+              </div>
+              <button
+                onClick={() => setShowNotificationModal(false)}
+                className="p-1 rounded-lg text-slate-400 hover:text-slate-600"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="space-y-3 text-xs">
+              <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-100">
+                <span className="font-bold text-emerald-800 block mb-0.5">
+                  Cabinet Approval: GEC Phase-III
+                </span>
+                <p className="text-emerald-700 leading-relaxed">
+                  ₹1,86,405 Crore sanctioned for 135 GW RE evacuation and 50 GWh BESS battery capacity.
+                </p>
+              </div>
+              <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
+                <span className="font-bold text-slate-800 block mb-0.5">
+                  Statutory RPO Mandate: 29.91%
+                </span>
+                <p className="text-slate-600 leading-relaxed">
+                  Active statutory compliance target for FY 2024-25 scaling to 43.33% by 2030 under MoP gazette.
+                </p>
+              </div>
+              <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
+                <span className="font-bold text-slate-800 block mb-0.5">
+                  PM Surya Ghar Operational Slabs
+                </span>
+                <p className="text-slate-600 leading-relaxed">
+                  Direct financial subsidy capped at ₹78,000 for 3 kW and above (₹30k/kW for first 2 kW, ₹18k 3rd kW).
+                </p>
+              </div>
+            </div>
+            <div className="mt-5 pt-3 border-t border-slate-100 flex justify-end">
+              <button
+                onClick={() => setShowNotificationModal(false)}
+                className="px-4 py-2 rounded-xl bg-[#073326] text-white font-bold text-xs"
+              >
+                Dismiss
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
