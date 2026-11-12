@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useRole, UserRole } from "./RoleContext";
 import { User, Bell, ChevronDown, ShieldCheck, Sparkles, X } from "lucide-react";
 import { DATA_CITATIONS } from "@/data/energyData";
+import { LiveWeatherTelemetry } from "./LiveWeatherTelemetry";
 
 export function TopHeader() {
   const { role, setRole } = useRole();
@@ -11,6 +12,9 @@ export function TopHeader() {
 
   return (
     <div className="w-full flex items-center justify-end gap-3 py-3 px-6 border-b border-slate-200/80 bg-white/70 backdrop-blur-md sticky top-0 z-30">
+      {/* Live Weather-API Renewable Output, Battery Sizing & CPCB Air Quality Telemetry */}
+      <LiveWeatherTelemetry />
+
       {/* Role Switcher matching Reference Image 1 */}
       <div className="flex items-center gap-2 text-xs text-slate-600 font-medium">
         <span>Role:</span>

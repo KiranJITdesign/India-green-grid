@@ -14,6 +14,23 @@
       "estimatedPenaltyINR": 0,
       "statusLabel": "Compliant (Surplus)",
       "submittedBy": "State Regulatory Commission Officer",
+      "id": "AUDIT-2026-008",
+      "createdAt": "2026-11-12T08:33:13.315Z"
+    },
+    {
+      "discomName": "BESCOM (Bangalore Electricity)",
+      "state": "Karnataka",
+      "totalProcuredMWh": 32500000,
+      "renewableProcuredMWh": 11450000,
+      "targetYear": "FY 2024-25 Target (29.91%)",
+      "targetPercent": 29.91,
+      "compliancePercent": 35.23,
+      "isCompliant": true,
+      "shortfallUnitsMWh": 0,
+      "surplusUnitsMWh": 1729250,
+      "estimatedPenaltyINR": 0,
+      "statusLabel": "Compliant (Surplus)",
+      "submittedBy": "State Regulatory Commission Officer",
       "id": "AUDIT-2026-007",
       "createdAt": "2026-11-12T06:52:37.622Z"
     },
@@ -218,6 +235,21 @@
     }
   ],
   "jobApplications": [
+    {
+      "jobId": "OJ-001",
+      "jobTitle": "Clean Energy Professional",
+      "company": "National Clean Energy Mission",
+      "candidateName": "Soudri Kiran",
+      "email": "soudrikiran@gmail.com",
+      "phone": "8867147082",
+      "experienceLevel": "Entry Level (0-2 yrs)",
+      "qualification": "B.Tech / B.E. Electrical",
+      "scgjCertification": true,
+      "id": "APP-005",
+      "applicationNumber": "SCGJ-2026-12342",
+      "status": "Received",
+      "createdAt": "2026-11-12T08:28:30.909Z"
+    },
     {
       "jobId": "GJ-001",
       "jobTitle": "Rooftop Solar Installation Engineer",
@@ -835,5 +867,5 @@
       "applyUrlLabel": "Apply via SIDBI Mitra"
     }
   ],
-  "lastUpdated": "2026-11-12T07:30:49.907Z"
+  "lastUpdated": "2026-11-12T08:33:13.315Z"
 }
