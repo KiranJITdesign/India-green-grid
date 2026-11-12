@@ -9,7 +9,7 @@
 ![License](https://img.shields.io/badge/license-MIT-lightgrey)
 
 > Built for **CodeSpark 2026** — Domain 4: Renewable and Sustainable Energy, Problem Statement 1
-> Department of CSE – Data Science, AMC Engineering College
+> Department of CSE – Data Science, Jyothi Institute of Technology 
 
 ---
 
@@ -264,4 +264,3 @@ npm start
 
 ## License
 
-MIT
