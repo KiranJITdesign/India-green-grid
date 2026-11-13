@@ -9,7 +9,12 @@
 ![License](https://img.shields.io/badge/license-MIT-lightgrey)
 
 > Built for **CodeSpark 2026** — Domain 4: Renewable and Sustainable Energy, Problem Statement 1
+<<<<<<< HEAD
 > Department of CSE – Data Science, Jyothi Institute of Technology 
+=======
+> Department of CSE – Data Science, Jyothi Institute of Technology
+> At AMC ENGINEERING COLLEGE 
+>>>>>>> f2fc9dacd9c6cf7772eb6c8aa4967711788f9ddf
 
 ---
 
@@ -74,7 +79,10 @@ Pulls live weather data to estimate a solar/wind output factor, sizes a battery 
 
 ### 🗄️ Audit & Lead Registry
 REST endpoints backing the interactive modules with a persistent JSON store and one-click export (see [API Reference](#api-reference)).
+<<<<<<< HEAD
 
+=======
+>>>>>>> f2fc9dacd9c6cf7772eb6c8aa4967711788f9ddf
 ---
 
 ## Official Data Sources
@@ -247,7 +255,10 @@ npm start
 | `/api/telemetry/live` | `GET` | Live weather, solar/wind output factor, and AQI snapshot |
 
 ---
+<<<<<<< HEAD
 
+=======
+>>>>>>> f2fc9dacd9c6cf7772eb6c8aa4967711788f9ddf
 ## Acceptance Checklist
 
 | Criterion | Status |
@@ -262,7 +273,10 @@ npm start
 
 ---
 
+<<<<<<< HEAD
 ## License
 
 # greengrid
 # greengrid
+=======
+>>>>>>> f2fc9dacd9c6cf7772eb6c8aa4967711788f9ddf
