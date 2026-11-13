@@ -9,7 +9,8 @@
 ![License](https://img.shields.io/badge/license-MIT-lightgrey)
 
 > Built for **CodeSpark 2026** — Domain 4: Renewable and Sustainable Energy, Problem Statement 1
-> Department of CSE – Data Science, Jyothi Institute of Technology 
+> Department of CSE – Data Science, Jyothi Institute of Technology
+> At AMC ENGINEERING COLLEGE 
 
 ---
 
@@ -261,6 +262,4 @@ npm start
 | Platform consolidates 4+ public data sources into one interface | ✅ |
 
 ---
-
-## License
 
