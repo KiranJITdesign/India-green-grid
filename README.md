@@ -75,7 +75,6 @@ Pulls live weather data to estimate a solar/wind output factor, sizes a battery 
 
 ### 🗄️ Audit & Lead Registry
 REST endpoints backing the interactive modules with a persistent JSON store and one-click export (see [API Reference](#api-reference)).
-
 ---
 
 ## Official Data Sources
@@ -248,7 +247,6 @@ npm start
 | `/api/telemetry/live` | `GET` | Live weather, solar/wind output factor, and AQI snapshot |
 
 ---
-
 ## Acceptance Checklist
 
 | Criterion | Status |
