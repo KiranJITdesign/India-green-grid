@@ -1,0 +1,22 @@
+job_title,domain,level,typical_qualification,salary_min_lpa,salary_max_lpa,key_skills,employer_type,typical_locations,note
+Solar PV Installer,Solar,Entry,ITI/Diploma,2.0,3.5,"Rooftop wiring, panel mounting",Installer/EPC,Pan-India,Illustrative role taxonomy and approximate salary bands - not live job postings
+Solar Site Engineer,Solar,Mid,B.Tech Electrical,4.0,8.0,"Commissioning, QA",EPC,"Rajasthan, Gujarat, TN",Illustrative role taxonomy and approximate salary bands - not live job postings
+Solar Design Engineer,Solar,Mid,B.Tech,5.0,10.0,"PVsyst, AutoCAD",EPC/IPP,"Bengaluru, Delhi NCR",Illustrative role taxonomy and approximate salary bands - not live job postings
+Solar O&M Technician,Solar,Entry,ITI/Diploma,2.2,4.0,"Inverter, SCADA basics",IPP/O&M,"Rajasthan, Gujarat",Illustrative role taxonomy and approximate salary bands - not live job postings
+Solar Project Manager,Solar,Senior,B.Tech/MBA,15.0,30.0,"Project planning, PPA",IPP/EPC,"Delhi NCR, Mumbai",Illustrative role taxonomy and approximate salary bands - not live job postings
+PV Module Manufacturing Engineer,Solar,Mid,B.Tech,5.0,12.0,Cell/module process,Manufacturer,"Gujarat, Tamil Nadu",Illustrative role taxonomy and approximate salary bands - not live job postings
+Wind Turbine Technician,Wind,Entry,ITI/Diploma,2.5,4.5,"Height safety, mechanical",OEM/O&M,"Tamil Nadu, Gujarat",Illustrative role taxonomy and approximate salary bands - not live job postings
+Wind Resource Analyst,Wind,Mid,B.Tech/M.Tech,6.0,12.0,Wind data modelling,Developer/Consultant,"Chennai, Pune",Illustrative role taxonomy and approximate salary bands - not live job postings
+Wind Project Engineer,Wind,Mid,B.Tech,6.0,14.0,Civil/electrical BoP,Developer,Pan-India,Illustrative role taxonomy and approximate salary bands - not live job postings
+Battery Cell Process Engineer,Battery,Mid,B.Tech/M.Tech,6.0,14.0,Li-ion cell manufacturing,Manufacturer,"Gujarat, Telangana",Illustrative role taxonomy and approximate salary bands - not live job postings
+BESS Systems Engineer,Battery,Mid,B.Tech,7.0,16.0,Grid-scale storage design,Developer/EPC,"Bengaluru, Delhi NCR",Illustrative role taxonomy and approximate salary bands - not live job postings
+Battery Management Systems Engineer,Battery,Mid,B.Tech/M.Tech,8.0,18.0,BMS firmware,EV/Storage OEM,"Bengaluru, Pune",Illustrative role taxonomy and approximate salary bands - not live job postings
+EV Charging Infrastructure Engineer,Battery/EV,Mid,B.Tech,5.0,12.0,Charger deployment,CPO/OEM,Metro cities,Illustrative role taxonomy and approximate salary bands - not live job postings
+Green Hydrogen Process Engineer,Hydrogen,Mid,B.Tech Chemical,7.0,16.0,Electrolyser operations,Energy majors,"Gujarat, Odisha",Illustrative role taxonomy and approximate salary bands - not live job postings
+Energy Auditor,Efficiency,Mid,BEE certified,4.0,9.0,Industrial audits,Consultant,Pan-India,Illustrative role taxonomy and approximate salary bands - not live job postings
+ESG Analyst,Sustainability,Entry,MBA/Any degree,5.0,10.0,BRSR reporting,Corporate/Consulting,"Mumbai, Bengaluru",Illustrative role taxonomy and approximate salary bands - not live job postings
+Sustainability Manager,Sustainability,Senior,MBA/Env. Science,15.0,35.0,Net-zero strategy,Corporate,"Mumbai, Delhi NCR",Illustrative role taxonomy and approximate salary bands - not live job postings
+Carbon Markets Analyst,Sustainability,Mid,Any + Env.,6.0,14.0,"Carbon credits, CCTS",Consultant/Corporate,"Delhi NCR, Mumbai",Illustrative role taxonomy and approximate salary bands - not live job postings
+Renewable Energy Policy Analyst,Policy,Mid,Public policy/Eng.,6.0,15.0,Regulatory analysis,Think tank/Developer,Delhi NCR,Illustrative role taxonomy and approximate salary bands - not live job postings
+Power Systems Engineer (RE integration),Grid,Senior,B.Tech/M.Tech,12.0,28.0,"Grid studies, forecasting",Utility/Consultant,Pan-India,Illustrative role taxonomy and approximate salary bands - not live job postings
+Solar Sales Executive (residential),Solar,Entry,Any graduate,2.5,6.0,"Lead gen, subsidy guidance",Installer,Pan-India,Illustrative role taxonomy and approximate salary bands - not live job postings
